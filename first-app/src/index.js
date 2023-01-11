@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import Appcontext from './Appcontext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const user = {name : "Mouad" , email:"mouad@gmail.com", password:"apahtfo3lik"}
+const user={name : "mouad",email:"mouad@mouad.com",password:"apahtfo3lik"}
 root.render(
   <React.StrictMode>
     <Appcontext.Provider value={user}>
