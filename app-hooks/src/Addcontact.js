@@ -1,19 +1,33 @@
 import React from 'react'
 
-export default function Addcontact({Addcont}) {
+function Addcontact({history}) {
     const [contact,setContact]=React.useState([
-        {name:'',Age:''}
+        {id:'',name:'',Age:''}
     ])
+    const [contacts ,setContacts]=React.useState([]);
     function Submitform(event){
             event.preventDefault();
-            Addcont(contact)
+            contacts.push(contact)
+            localStorage.setItem("contacts",JSON.stringify(contacts));
+            alert("contact added success")
+            setContact({id:'',name:'',Age:''})
         }
+        React.useEffect (()=>{
+            const contfromstorage = JSON.parse(localStorage.getItem("contacts")) || [];
+            setContacts(...contacts,contfromstorage);
+              return()=>{
+              }
+          },[]);
   return (
-    <div className='mb-4'>
+    <div className='mb-4 mx-auto col-md-6'>
         <form onSubmit={(event)=>Submitform(event)}>
-        <div class="form-group">
-        <label class="form-label mt-4 text-center">Addcontact</label>
-        <div class="form-floating mb-3">
+        <div className="form-group">
+        <label className="form-label mt-4 text-center">Addcontact</label>
+        <div className="form-floating mb-3">
+            <input type="text" className="form-control" name={contact.id} id="floatingInput" autoComplete='off' placeholder='id' onChange={(event)=>setContact({...contact, id:event.target.value})}/>
+            <label for="floatingInput">Num serie</label>
+        </div>
+        <div className="form-floating mb-3">
             <input type="text" className="form-control" name={contact.name} id="floatingInput" autoComplete='off' placeholder='name' onChange={(event)=>setContact({...contact, name:event.target.value})}/>
             <label for="floatingInput">Name</label>
         </div>
@@ -28,3 +42,4 @@ export default function Addcontact({Addcont}) {
     </div>
   )
 }
+export default  Addcontact ; 
