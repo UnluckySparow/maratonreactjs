@@ -1,0 +1,9 @@
+export const Get_contacts = () =>{
+    JSON.parse(localStorage.getItem("contacts"));
+    return (dispatch) =>{
+        dispatch({
+            type:"Get-contacts",
+            payload:contacts
+        });
+    }
+}
