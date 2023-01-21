@@ -1,19 +1,18 @@
 import React from 'react'
-// import Addcontact from './Addcontact';
+import GetContact  from './redux/actions/Get-contact';
+import deletcont  from './redux/actions/Get-contact';
+import { useDispatch,connect} from 'react-redux';
+function Contact({ contacts }) {
+    const [data,setData] = React.useState();
+    const dispatch = useDispatch();
+    
 
-function Contact() {
-    const [contacts,setContacts] = React.useState([]);
-    React.useEffect (()=>{
-      const contfromstorage = JSON.parse(localStorage.getItem("contacts")) || [];
-      setContacts(...contacts,contfromstorage);
-        return()=>{
-        }
+    React.useEffect (() => {
+      // dispatch({GetContact});  
     },[]);
     
-    function deleteCont(id){
-        const oldcont=contacts.filter((contact)=>contact.id !== id);
-        localStorage.setItem("contacts",JSON.stringify(oldcont));
-        setContacts(oldcont);
+    function Remcont(id){
+        dispatch(deletcont(id));  
     }
    
   return (
@@ -28,13 +27,14 @@ function Contact() {
       <th scope="col">Delete</th>
     </tr>
   </thead>
+
   <tbody>
-    {contacts && contacts.map((contact)=>(
+    {data && data.map((contact)=>(
     <tr className="">
       <td>{contact.id}</td>
         <td>{contact.name}</td>
         <td>{contact.Age}</td>
-        <td><button type="button" onClick={()=>(deleteCont(contact.id))} className="mt-3 btn btn-danger">Delete</button></td>
+        <td><button type="button" onClick={()=>(Remcont(contact.id))} className="mt-3 btn btn-danger">Delete</button></td>
       </tr>
     ))
     }
@@ -43,5 +43,7 @@ function Contact() {
     </div>
   )
 }
-
-export default Contact;
+const mapStateProps = ({contact : {contacts}})=>({
+  contacts,
+});
+export default connect(mapStateProps,null)(Contact);

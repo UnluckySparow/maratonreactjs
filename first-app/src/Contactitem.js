@@ -1,12 +1,12 @@
 import React from 'react'
 
-function Contactitem({contact , deleteContact}) {
+function Contactitem({contact}) {
   return (
     <tr>
      <td>{contact.name}</td>
-      <td>{contact.prenom}</td>
-      <td>{contact.Age}</td>
-      <td><button type="button" onClick={()=>deleteContact(contact.prenom)} class="btn btn-outline-danger">Delete</button></td>
+      <td>{contact.prenom}</td> 
+       <td>{contact.Age}</td>
+      <td><button type="button"  class="btn btn-outline-danger">Delete</button></td>
     </tr>
   )
 }

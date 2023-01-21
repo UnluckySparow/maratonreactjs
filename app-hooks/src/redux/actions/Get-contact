@@ -1,9 +1,31 @@
-export const Get_contacts = () =>{
+export const GetContact = () =>  {
     JSON.parse(localStorage.getItem("contacts"));
     return (dispatch) =>{
         dispatch({
-            type:"Get-contacts",
+            type:"getcontact",
             payload:contacts
+        });
+    }
+}
+export const addCont = (contact) =>  {
+    const updatedcont = JSON.parse(localStorage.getItem("contacts"));
+    updatedcont.push(contact);
+    localStorage.setItem(contacts,JSON.stringify(updatedcont))
+    return (dispatch) =>{
+        dispatch({
+            type:"ADD_CONTACT",
+            payload:updatedcont
+        });
+    }
+}
+export const deletcont =(id)=>{
+    const contacts = JSON.parse(localStorage.getItem("contacts"));
+    let updatecont=contacts.filter((contact)=> (contact.id !== id))
+    localStorage.setItem(contacts,JSON.stringify(updatecont))
+    return (dispatch) =>{
+        dispatch({
+            type:"DEL_CONTACT",
+            payload:updatedcont
         });
     }
 }

@@ -22,6 +22,12 @@ class Addcontact extends React.Component {
         this.setState({name:"",prenom:"",Age:""})
         
     }
+    React.useEffect (()=>{
+        const contfromstorage = JSON.parse(localStorage.getItem("contacts")) || [];
+        setContacts(...contacts,contfromstorage);
+          return()=>{
+          }
+      },[]);
   render(){
     return (
         <div className='col-md-6 mx-auto'>

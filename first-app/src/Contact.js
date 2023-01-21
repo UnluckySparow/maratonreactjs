@@ -1,33 +1,34 @@
 import React from 'react'
-import Contactitem from './Contactitem'
-import Addcontact from './Addcontact'
+// import Contactitem from './Contactitem'
+// import Addcontact from './Addcontact'
 
 
-class Contact extends React.Component {
-    constructor(props){
-        super(props)
-        this.state={
-            contacts: [
-                {name:"Aihtmidine" , prenom : "Mouad" , Age : 24},
-                {name:"Aihtmidine" , prenom : "Zakaria" , Age : 28},
-                {name:"Aihtmidine" , prenom : "Hamid" , Age : 30},
-            ]
-        }
-    }
-    addContact=(contact)=>{
-        let updatecontact = this.state.contacts;
-        updatecontact.push(contact)
-        this.setState({contacts : updatecontact})
-    }
-    deleteContact = (prenom) =>{
-        let oldContact = this.state.contacts;
-        oldContact = oldContact.filter ((contact) => contact.prenom !== prenom);
-        this.setState ({contacts : oldContact});
-    }
-    render() {
+function Contact () {
+    const [contacts,setContacts]=React.useState([]);
+    const listcontact=[
+        {name:"Aihtmidine" , prenom : "Mouad" , Age : 24},
+        {name:"Aihtmidine" , prenom : "Zakaria" , Age : 28},
+        {name:"Aihtmidine" , prenom : "Hamid" , Age : 30},
+    ]
+    console.log(contacts)
+    React.useEffect(()=>{
+        setContacts(listcontact);
+        return()=>{
+            console.log(contacts)
+        };
+    },[contacts])
+    // addContact=(contact)=>{
+    //     let updatecontact = this.state.contacts;
+    //     updatecontact.push(contact)
+    //     this.setState({contacts : updatecontact})
+    // }
+    // deleteContact = (prenom) =>{
+    //     let oldContact = this.state.contacts;
+    //     oldContact = oldContact.filter ((contact) => contact.prenom !== prenom);
+    //     this.setState ({contacts : oldContact});
+    // }
         return (
             <div className='align-middle'>
-                <Addcontact addContact={this.addContact} />
                 <div className='col-md-6 mx-auto'>
                     <table class="table table-hover">
                         <thead>
@@ -39,8 +40,13 @@ class Contact extends React.Component {
                             </tr>
                         </thead>
                         <tbody>
-                                {this.state.contacts.map((contact, index)=>(
-                                    <Contactitem deleteContact={this.deleteContact} key={index} contact={contact}/>
+                                {contacts.map((contact)=>(
+                                    <tr>
+                                    <td>{contact.name}</td>
+                                     <td>{contact.prenom}</td> 
+                                      <td>{contact.Age}</td>
+                                     <td><button type="button"  class="btn btn-outline-danger">Delete</button></td>
+                                   </tr>
                                 )
                                 )}
                         </tbody>
@@ -48,7 +54,6 @@ class Contact extends React.Component {
                 </div>
             </div>
           )
-    }
     
 }
 
