@@ -1,12 +1,13 @@
-import logo from './logo.svg';
+import React from 'react'
 import './App.css';
+import Client from './Client';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-<div> Graphql  comming soon .. </div>
-    </div>
-  );
-}
+    <div>
+      <Client />
+      app apollo
 
-export default App;
+    </div>
+  )
+  }
